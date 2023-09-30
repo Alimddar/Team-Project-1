@@ -12,7 +12,7 @@ class User(SQLModel, table=True):
     profile_photo: str
     create_date: datetime
     
-
+    #relation 
     notes: List["Note"] = Relationship(back_populates="user")
     schedules: List["Schedule"] = Relationship(back_populates="user")
 
