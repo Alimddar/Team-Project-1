@@ -11,6 +11,7 @@ class User(SQLModel, table=True):
     password: str
     profile_photo: str
     create_date: datetime
+    #commit
 
 
 class Note(SQLModel, table=True):
