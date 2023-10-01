@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI, HTTPException,status
 from sqlmodel import SQLModel, Session, create_engine,select
 from fastapi.middleware.cors import CORSMiddleware
-from models import User,WhiteBoard,Note,Schedule, timedelta, datetime,List
+from models import User,WhiteBoard,Note,Schedule, timedelta, datetime, List
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
 from jose import jwt, JWTError
 from passlib.context import CryptContext
@@ -9,8 +9,9 @@ from pydantic import BaseModel
 import os
 import threading
 
+
 secret_key = os.getenv("secret_key")
-ALGORITHM = "HS256"
+ALGORITHM = os.getenv("ALGORITHM")
 access_token_expire_minutes = 30
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -24,9 +25,7 @@ engine = create_engine(DATABASE_URL, echo=True)
 
 SQLModel.metadata.create_all(engine)
 
-
 thread_local = threading.local()
-
 
 def get_db():
     if not hasattr(thread_local, "session"):
@@ -44,6 +43,7 @@ def get_user(db, username: str):
     if user:
         return UserInDb(**user.dict(), hashed_password=user.password)
 
+##async def get_current_user(db: Session = Depends(get_db), token : str = Depends(oauth2_scheme)):
 
 def create_access_token(data: dict, expires_delta: timedelta = None):
         to_encode = data.copy()
@@ -109,22 +109,6 @@ async def delete_user(user_id: int, db: Session = Depends(get_db)):
     db.commit()
     return 'User Removed Succsessfully'
 
-@app.post('/schedules/', response_model=Schedule, tags=['Schedules'])
-async def create_schedule(schedule: Schedule, db: Session = Depends(get_db)):
-    user = db.get(User, schedule.user_id)
-    if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-    note = db.get(Note, schedule.note_id)  
-    if not note:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Note not found")
-    db_schedule = Schedule.from_orm(schedule)
-    db.add(db_schedule)
-    db.commit()
-    db.refresh(db_schedule)
-    return db_schedule
-
-
-
 @app.post('/note/create', response_model=Note, tags=['Notes'])
 async def create_note(note: Note, db: Session = Depends(get_db)):
     db.add(note)
@@ -132,18 +116,17 @@ async def create_note(note: Note, db: Session = Depends(get_db)):
     db.refresh(note)
     return note
 
-
 @app.get('/users/{user_id}/notes/', response_model=List[Note], tags=['Notes'])
 async def get_notes_by_user_id(user_id: int,db: Session = Depends(get_db)):
     statement = select(Note).where(Note.user_id == user_id)
     notes = db.exec(statement).all()
-
     if not notes:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No notes found for this user")
     return notes
 
 @app.put("/user/{user_id}/note/change", response_model=Note, tags=['Notes'])
-async def change_note(note_id: int, updated_note: Note, db: Session = Depends(get_db)): 
+async def change_note(
+    note_id: int, updated_note: Note, db: Session = Depends(get_db)): 
     db_note = db.query(Note).filter(Note.id == note_id).first()
     
     if not db_note:
@@ -156,17 +139,5 @@ async def change_note(note_id: int, updated_note: Note, db: Session = Depends(ge
     db_note.last_modified_date = datetime.utcnow() 
     db.commit()
     db.refresh(db_note)
+    
     return db_note
-
-@app.delete("/user/{user_id}/note/delete", response_model=Note, tags=['Notes'])
-async def delete_note(note_id: int, db: Session = Depends(get_db)):
-
-    note = db.get(Note, note_id)
-
-    if not note:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Note not found")
-        
-
-    db.delete(note)
-    db.commit()
-    return "Note deleted"
