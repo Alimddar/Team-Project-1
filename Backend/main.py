@@ -156,9 +156,7 @@ async def change_note(note_id: int, updated_note: Note, db: Session = Depends(ge
     db_note.last_modified_date = datetime.utcnow() 
     db.commit()
     db.refresh(db_note)
-    
     return db_note
-
 
 @app.delete("/user/{user_id}/note/delete", response_model=Note, tags=['Notes'])
 async def delete_note(note_id: int, db: Session = Depends(get_db)):
@@ -171,5 +169,4 @@ async def delete_note(note_id: int, db: Session = Depends(get_db)):
 
     db.delete(note)
     db.commit()
-
     return "Note deleted"
