@@ -20,7 +20,7 @@ DATABASE_URL = f"sqlite:///{db_url}"
 
 app = FastAPI()
 
-engine = create_engine(DATABASE_URL, echo=False)
+engine = create_engine(DATABASE_URL, echo=True)
 
 SQLModel.metadata.create_all(engine)
 
