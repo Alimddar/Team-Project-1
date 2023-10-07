@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime,timedelta 
 
 class User(SQLModel, table=True):
     id: Optional[int] = Field(primary_key=True)
@@ -9,7 +9,7 @@ class User(SQLModel, table=True):
     email: str
     username: str
     password: str
-    profile_photo: str
+    profile_photo: str 
     create_date: datetime
     
     #relation 
