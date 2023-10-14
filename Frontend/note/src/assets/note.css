@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+body {
+    font-family: 'Poppins';
+    display: flex;
+    align-items: flex-start; 
+    justify-content: flex-start;
+    height: 100vh; 
+    width: 100%;
+    margin: 0; 
+    padding: 0;
+    background-color: #434343; 
+}
+
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    width: 300px;  
+    height: 100vh;
+    background: #333;
+    padding: 20px; 
+    box-sizing: border-box;
+}
+
+
+.note-bar{
+    position: absolute;
+    top: 393px;
+    left: 476px;
+    color: #fff;
+    font-family: 'Poppins';
+    width: 1341px;
+    height: 364px;
+    flex-shrink: 0;
+    border-radius: 0px 0px 10px 10px;
+    background: #737373;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    outline: none;
+}
+
+.note-btn{
+    position: absolute;
+    top: 792px;
+    left: 975px;
+    color: #FFF;
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 316px;
+    height: 49px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: #7A7CFF;
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.links {
+    padding-top: 52px;
+    display: flex;
+    flex-direction: column;
+}
+
+.links a {
+    display: flex; 
+    align-items: center;
+    margin-bottom: 16px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 400;
+    font-family: Segoe UI;
+}
+
+.links a svg {
+    margin-right: 20px; 
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.prof-photo {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.text-info {
+    margin-left: 15px;
+}
+
+.text-info h1{
+    font-size: 18px;
+    color: #fff;
+}
+
+.text-info p{
+    font-size: 9px;
+    color: #8E8E8E;
+}
+
+.sidebar-btn{
+    margin-top: 21px; 
+    color: #FFF;
+    width: 270px;
+    height: 49px;
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 15px;
+    background: #7A7CFF;
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.hr-1{
+    width: 300px;
+    margin-left: -20px; 
+    border: 0;  
+    border-top: 3px solid #434343;  
+    height: 0;  
+}
+
+.hr-2{
+    width: 300px;
+    margin-left: -20px; 
+    border: 0;  
+    border-top: 3px solid #434343;  
+    height: 0;  
+    margin-top: 40px;
+}
+
+
+.note-h1{
+    position: absolute;
+    top: 353px;
+    left: 1070px;
+    color: #737373;
+    font-family: 'Poppins';
+    font-size: 20px;
+}
+
+.name-bar{
+    position: absolute;
+    top: 269px;
+    left: 800px;
+    width: 654px;
+    height: 62px;
+    flex-shrink: 0;
+    border-radius: 0px 0px 10px 10px;
+    background: #737373;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    outline: none;
+    color: #fff;
+    font-family: 'Poppins';
+}
+
+.name-h1{
+    position: absolute;
+    top: 220px;
+    left: 1065px;
+    color: #737373;
+    font-family: 'Poppins';
+    font-size: 20px;
+}
+
+.project-container h1{
+    color: #FFF;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+}
+
+.svg-1{
+    margin-right: 21px; 
+}
+
+.svg-2{
+    margin-left: 100px;
+}
+
+.project-container p{
+    color: #A1A1A1;
+    font-size: 16px;
+}
+
+.project-container p svg{
+    margin-right: 21px;
+}
+
+.footer{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer a{
+    padding-top: 32px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.footer a svg{
+    margin-right: 25px;
+}
